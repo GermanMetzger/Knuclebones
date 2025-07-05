@@ -1,0 +1,46 @@
+
+
+.lineaDados{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid white;
+    margin: 5px;
+    width: 200px;
+    height: 95%;
+}
+
+.dado{
+    height: 100px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+
+}
+
+.dado img{
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+}
+
+.totalVertical{
+    height: 100px;
+    width: 100px;
+    border: 1px solid gold;
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+
+}
+
