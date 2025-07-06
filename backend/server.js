@@ -24,8 +24,8 @@ io.on('connection', (socket) => {
 
 
   //socket modular
-  sala(socket,io)
-  juego(socket,io)
+  // sala(socket,io)
+  // juego(socket,io)
   
 
 
