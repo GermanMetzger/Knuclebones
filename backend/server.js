@@ -10,7 +10,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://knuclebones-production.up.railway.app/", // React corre por defecto en 3000
+    origin: "*", // React corre por defecto en 3000
     methods: ["GET", "POST"]
   }
 });
@@ -20,7 +20,7 @@ const sala = require("./sockets/sala")
 const juego = require("./sockets/juego")
 
 io.on('connection', (socket) => {
-  console.log('Usuario conectado:', socket.id);
+  console.log('🔌 Socket conectado:', socket.id);
 
 
   //socket modular
@@ -32,16 +32,16 @@ io.on('connection', (socket) => {
 
 
   socket.on('disconnect', () => {
-    console.log('Usuario desconectado:', socket.id);
+    console.log('❌ Socket desconectado:', socket.id);
   });
 });
 
 app.get('/', (req, res) => {
+  console.log("✅ GET / recibido");
   res.send("Servidor funcionando");
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`✅ Servidor corriendo en puerto ${PORT}`);
-  console.log(`🌐 URL pública: https://knuclebones-production.up.railway.app`);
+  console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
 });
