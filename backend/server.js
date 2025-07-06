@@ -24,8 +24,8 @@ io.on('connection', (socket) => {
 
 
   //socket modular
-  // sala(socket,io)
-  // juego(socket,io)
+  sala(socket,io)
+  juego(socket,io)
   
 
 
@@ -41,7 +41,6 @@ app.get('/', (req, res) => {
   res.send("Servidor funcionando");
 });
 
-const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => {
-  console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
+server.listen(8080, () => {
+  console.log("Servidor en 8080");
 });
