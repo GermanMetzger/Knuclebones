@@ -10,7 +10,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // React corre por defecto en 3000
+    origin: "https://knuclebones-production.up.railway.app/", // React corre por defecto en 3000
     methods: ["GET", "POST"]
   }
 });
