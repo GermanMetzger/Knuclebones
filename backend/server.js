@@ -10,7 +10,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:4000", "http://localhost:5173"], // React corre por defecto en 3000
+    origin: "*", // React corre por defecto en 3000
     methods: ["GET", "POST"]
   }
 });
@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
   res.send("Servidor funcionando");
 });
 
-server.listen(4000, () => {
-  console.log("Servidor en http://localhost:4000");
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`✅ Servidor corriendo en puerto ${PORT}`);
 });
