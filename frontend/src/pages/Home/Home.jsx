@@ -6,7 +6,7 @@ import TarjetaJugador from '../../Components/TarjetaJugador/TarjetaJugador';
 
 
 
-export const socket = io("https://knuclebones.onrender.com/");
+export const socket = io("knuclebones-production.up.railway.app");
 export default function Home() {
     const navigate = useNavigate()
     const [nombre, setNombre] = useState("")
