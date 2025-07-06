@@ -43,4 +43,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
+  console.log(`🌐 URL pública: https://knuclebones-production.up.railway.app`);
 });
