@@ -109,3 +109,68 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: x-large;
 }
+
+
+@media (max-width: 900px) {
+    .espacioRival {
+        height: 50%;
+        width: 95%;
+        flex-direction: column-reverse;
+        margin: 0;
+        padding: 1px;
+        border: 0;
+    }
+
+    .espacioPersonal {
+        height: 50%;
+        width: 95%;
+        flex-direction: column-reverse;
+        margin: 0;
+        padding: 1px;
+        border: 0;
+    }
+
+    .tableroPersonal {
+        height: 70%;
+        width: 100%;
+        border: 0;
+    }
+
+    .tableroRival {
+        height: 70%;
+        width: 100%;
+        border: 0;
+    }
+
+    .nombrePersonal {
+        height: 70%;
+        width: 95%;
+        flex-direction: initial;
+    }
+
+    .nombreRival {
+        height: 70%;
+        width: 95%;
+        flex-direction: initial;
+    }
+
+    .espacioDadosPersonal {
+        border-radius: 15px;
+    }
+
+    .espacioDadosRival {
+        border-radius: 15px;
+    }
+
+    .espacioDadosPersonal img {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+    }
+
+    .espacioDadosRival img {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+    }
+}

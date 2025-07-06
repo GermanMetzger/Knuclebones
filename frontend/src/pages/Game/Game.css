@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -6,9 +7,29 @@ html, body {
     box-sizing: border-box;
 }
 
-.espacioDeJuego{
+.espacioDeJuego {
     border: 1px solid blue;
     padding: 15px;
     height: 95%;
     width: 95%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+    }
+
+    .espacioDeJuego {
+        height: 85%;
+        width: 98vw;
+        border: 0;
+    }
 }

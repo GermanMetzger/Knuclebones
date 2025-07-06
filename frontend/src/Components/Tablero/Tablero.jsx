@@ -62,9 +62,23 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
             setTirandoDadoOponente(false)
         })
 
-
-
     }, [])
+
+    useEffect(() => {
+        // Función para saber si un tablero está lleno (todas las columnas tienen 3 dados)
+        const tableroLleno = (tablero) => tablero.every(col => col.length === 3);
+
+        if (tableroLleno(tableroPersonal) || tableroLleno(tableroRival)) {
+            // Muestra el resultado (puedes hacer un modal, alerta, etc.)
+            if (totalTableroPersonal > totalTableroRival) {
+                alert("¡Ganaste! " + totalTableroPersonal + " a " + totalTableroRival);
+            } else if (totalTableroPersonal < totalTableroRival) {
+                alert("¡Perdiste! " + totalTableroPersonal + " a " + totalTableroRival);
+            } else {
+                alert("¡Empate! " + totalTableroPersonal + " a " + totalTableroRival);
+            }
+        }
+    }, [tableroPersonal, tableroRival]);
 
 
     const tirarDado = () => {
@@ -112,7 +126,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const sumarDadoLinea = (columnaIdx) => {
         if (miTurno) {
             socket.emit("game:limpieza", ({ codigoSala: codigoSala }))
-            if (dadoActual && tableroPersonal[columnaIdx].length < 4) {
+            if (dadoActual && tableroPersonal[columnaIdx].length < 3) {
                 setTableroPersonal(prev => {
                     const nuevoTablero = prev.map((col, idx) =>
                         (idx === columnaIdx) ? [...col, dadoActual] : col
@@ -137,7 +151,29 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
             }
         }
     };
-    
+
+    const calcularTotalColumna = (col) => {
+        if (col.length === 3 && col[0] === col[1] && col[1] === col[2]) {
+            return col[0] * 9;
+        } else if (col.length >= 2 && col[0] === col[1]) {
+            return col[0] * 4 + (col[2] || 0);
+        } else if (col.length >= 2 && col[0] === col[2]) {
+            return col[0] * 4 + (col[1] || 0);
+        } else if (col.length >= 2 && col[1] === col[2]) {
+            return col[1] * 4 + (col[0] || 0);
+        } else {
+            return col.reduce((acc, num) => acc + num, 0);
+        }
+    };
+
+    const totalTableroPersonal = tableroPersonal.reduce(
+        (acc, col) => acc + calcularTotalColumna(col), 0
+    );
+
+    const totalTableroRival = tableroRival.reduce(
+        (acc, col) => acc + calcularTotalColumna(col), 0
+    );
+
 
 
 
@@ -148,7 +184,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                 <div className='nombreRival'>
                     {!miTurno && <div>Tu turno</div>}
                     {nombre} <br />
-                    Puntos:{tableroRival.flat().reduce((acc, num) => acc + num, 0)}
+                    Puntos:{totalTableroRival}
                 </div>
                 <div className="tableroRival">
                     {tableroRival.map((columna, idx) => (
@@ -157,6 +193,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                             lineaVertical={columna}
                             yo={yo}
                             rival={rival}
+                            totalLinea={calcularTotalColumna(columna)}
                         />
                     ))}
                 </div>
@@ -186,13 +223,14 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                             yo={yo}
                             rival={rival}
                             onClick={() => sumarDadoLinea(idx)}
+                            totalLinea={calcularTotalColumna(columna)}
                         />
                     ))}
                 </div>
                 <div className='nombrePersonal'>
                     {miTurno && <div>Tu turno</div>}
                     {nombre} <br />
-                    Puntos:{tableroPersonal.flat().reduce((acc, num) => acc + num, 0)}
+                    Puntos:{totalTableroPersonal}
                 </div>
             </div>
 

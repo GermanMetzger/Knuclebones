@@ -21,11 +21,11 @@ export default function LineaVerticalDados({ lineaVertical, yo, rival, onClick }
     if(idx0 === idx1 && idx1 === idx2 && idx0 !== 0){
       total = idx0*9
     }else if(idx0 === idx1 && idx0 !== 0 && idx1 !== 0){
-      total = idx0*4
+      total = idx0*4 + idx2
     }else if(idx0 === idx2 && idx0 !== 0 && idx2 !== 0){
-      total = idx0*4
+      total = idx0*4 + idx1
     }else if(idx1 === idx2 && idx1 !== 0 && idx2 !== 0){
-      total = idx1*4
+      total = idx1*4 + idx0
     }else{
       total = idx0 + idx1 + idx2
     }

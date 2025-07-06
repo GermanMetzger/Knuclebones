@@ -37,10 +37,13 @@ io.on('connection', (socket) => {
 });
 
 app.get('/', (req, res) => {
-  console.log("✅ GET / recibido");
   res.send("Servidor funcionando");
 });
 
 server.listen(8080, () => {
   console.log("Servidor en 8080");
 });
+
+// server.listen(4000, () => {
+//   console.log("Servidor en 4000");
+// });

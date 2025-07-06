@@ -7,6 +7,7 @@ import TarjetaJugador from '../../Components/TarjetaJugador/TarjetaJugador';
 
 
 export const socket = io("https://knuclebones-production.up.railway.app/");
+// export const socket = io("http://localhost:4000");
 export default function Home() {
     const navigate = useNavigate()
     const [nombre, setNombre] = useState("")
