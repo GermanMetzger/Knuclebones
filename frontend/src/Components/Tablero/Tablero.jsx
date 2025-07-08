@@ -24,6 +24,8 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const [tirandoDadoOponente, setTirandoDadoOponente] = useState(false);
     const [dadoActual, setDadoActual] = useState(null);
     const [bloqueado, setBloqueado] = useState(false)
+    const esCelular = window.innerWidth < 900;
+
 
 
 
@@ -71,7 +73,6 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
         const tableroLleno = (tablero) => tablero.every(col => col.length === 3);
 
         if (tableroLleno(tableroPersonal) || tableroLleno(tableroRival)) {
-            // Muestra el resultado (puedes hacer un modal, alerta, etc.)
             if (totalTableroPersonal > totalTableroRival) {
                 alert("¡Ganaste! " + totalTableroPersonal + " a " + totalTableroRival);
             } else if (totalTableroPersonal < totalTableroRival) {
@@ -79,6 +80,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
             } else {
                 alert("¡Empate! " + totalTableroPersonal + " a " + totalTableroRival);
             }
+
         }
     }, [tableroPersonal, tableroRival]);
 
@@ -194,10 +196,8 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                 >
-                    <div className='nombreRival'>
-                        {!miTurno && <div>Tu turno</div>}
-                        {nombre} <br />
-                        Puntos:{totalTableroRival}
+                    <div className='nombreRival' style={!miTurno ? { borderColor: "gold" } : { borderColor: "grey" }}>
+                        Puntos de {nombre} = {totalTableroRival}
                     </div>
                     <motion.div className="tableroRival"
                         animate={
@@ -261,18 +261,33 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                                     src={require(`../../Assets/dado${dadoActual}.png`)}
                                     alt={`Dado ${dadoActual}`}
                                     drag
-                                    dragConstraints={{ top: -200, bottom: 200, left: 0, right: 600 }}
+                                    dragConstraints={!esCelular ? { top: -200, bottom: 200, left: 0, right: 600 } : { top: -300, bottom: 0, left: -300, right: 300 }}
                                     onDragEnd={(event, info) => {
                                         console.log("Soltó en:", info.point); // punto donde soltó
+                                        let izq = window.innerWidth *0.35;
+                                        let der = window.innerWidth *0.65;
 
-                                        if (info.point.x > 550 && info.point.x <= 750) {
-                                            sumarDadoLinea(0)
-                                        } else if (info.point.x > 750 && info.point.x <= 900) {
-                                            sumarDadoLinea(1)
-                                        } else if (info.point.x > 900 && info.point.x <= 1200) {
-                                            sumarDadoLinea(2)
+
+                                        if (esCelular) {
+                                            if (info.point.x < izq) {
+                                                sumarDadoLinea(0)
+                                            } else if (info.point.x > izq && info.point.x <= der) {
+                                                sumarDadoLinea(1)
+                                            } else if (info.point.x > der) {
+                                                sumarDadoLinea(2)
+                                            } else {
+                                            }
                                         } else {
+                                            if (info.point.x > 550 && info.point.x <= 750) {
+                                                sumarDadoLinea(0)
+                                            } else if (info.point.x > 750 && info.point.x <= 900) {
+                                                sumarDadoLinea(1)
+                                            } else if (info.point.x > 900 && info.point.x <= 1200) {
+                                                sumarDadoLinea(2)
+                                            } else {
+                                            }
                                         }
+
                                     }}
                                     initial={{ scale: 0 }}
                                     animate={{ scale: 1 }}
@@ -324,10 +339,8 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                             />
                         ))}
                     </motion.div>
-                    <div className='nombrePersonal'>
-                        {miTurno && <div>Tu turno</div>}
-                        {nombre} <br />
-                        Puntos:{totalTableroPersonal}
+                    <div className='nombrePersonal' style={miTurno ? { borderColor: "gold" } : { borderColor: "grey" }}>
+                        Puntos de {nombre} = {totalTableroPersonal}
                     </div>
                 </motion.div>
             </AnimatePresence>

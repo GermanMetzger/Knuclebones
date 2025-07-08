@@ -1,25 +1,27 @@
 html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-    user-select: none;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .espacioDeJuego {
-    position: relative;
-    padding: 15px;
-    height: 95%;
-    width: 95%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(5, 2, 2, 0.822);
-    z-index: 99999;
+  position: relative;
+  padding: 15px;
+  height: 95%;
+  width: 95%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(5, 2, 2, 0.822);
+  z-index: 99999;
 }
 
 .envoltorio-dado {
@@ -86,16 +88,16 @@ body {
 }
 
 @media (max-width: 900px) {
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
 
-    html,
-    body {
-        height: 100%;
-        width: 100%;
-    }
-
-    .espacioDeJuego {
-        height: 85%;
-        width: 98vw;
-        border: 0;
-    }
+  .espacioDeJuego {
+    height: 85%;
+    width: 98vw;
+    border: 0;
+    padding: 15px;
+  }
 }
