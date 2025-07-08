@@ -3,6 +3,7 @@ import "./Tablero.css"
 import { useEffect } from 'react'
 import { useState } from 'react'
 import LineaVerticalDados from '../LineaVerticalDados/LineaVerticalDados'
+import { AnimatePresence, motion, scale } from "framer-motion"
 
 export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const tableroVacio = [
@@ -22,6 +23,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const [tirandoDado, setTirandoDado] = useState(false);
     const [tirandoDadoOponente, setTirandoDadoOponente] = useState(false);
     const [dadoActual, setDadoActual] = useState(null);
+    const [bloqueado, setBloqueado] = useState(false)
 
 
 
@@ -87,6 +89,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     }
 
     const jugarTurno = () => {
+        setBloqueado(true)
         console.log("Tirando dados!")
         setTirandoDado(true);
         let frames = 0;
@@ -103,6 +106,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                 clearInterval(interval);
                 setDadoActual(resultado);
                 setTirandoDado(true);
+                setBloqueado(false)
             }
         }, 100);
 
@@ -124,7 +128,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     };
 
     const sumarDadoLinea = (columnaIdx) => {
-        if (miTurno) {
+        if (miTurno && !bloqueado) {
             socket.emit("game:limpieza", ({ codigoSala: codigoSala }))
             if (dadoActual && tableroPersonal[columnaIdx].length < 3) {
                 setTableroPersonal(prev => {
@@ -143,9 +147,12 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                     });
                     return nuevoTablero;
                 });
-                setDadoActual(null); // Limpia el dado actual
-                setTirandoDado(false); // Termina el turno
-                setTirandoDadoOponente(false); // Termina el turno
+                setTirandoDadoOponente(false);
+                setDadoActual(null)
+
+                setTimeout(() => { setTirandoDado(false) }, 1000) // Termina el turno
+            } else if (!dadoActual) {
+                console.log("Tirar dados primero")
             } else {
                 alert("Columna LLENA!")
             }
@@ -179,60 +186,151 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
 
     if (rival) {
         return (
+            <AnimatePresence>
 
-            <div className={"espacioRival"}>
-                <div className='nombreRival'>
-                    {!miTurno && <div>Tu turno</div>}
-                    {nombre} <br />
-                    Puntos:{totalTableroRival}
-                </div>
-                <div className="tableroRival">
-                    {tableroRival.map((columna, idx) => (
-                        <LineaVerticalDados
-                            key={idx}
-                            lineaVertical={columna}
-                            yo={yo}
-                            rival={rival}
-                            totalLinea={calcularTotalColumna(columna)}
-                        />
-                    ))}
-                </div>
-                <div className='espacioDadosRival'>
-                    {tirandoDadoOponente && dadoActual && (
-                        <img src={require(`../../Assets/dado${dadoActual}.png`)} alt={`Dado ${dadoActual}`} />
-                    )}
-                </div>
-            </div>
+
+                <motion.div className={"espacioRival"}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                >
+                    <div className='nombreRival'>
+                        {!miTurno && <div>Tu turno</div>}
+                        {nombre} <br />
+                        Puntos:{totalTableroRival}
+                    </div>
+                    <motion.div className="tableroRival"
+                        animate={
+                            !miTurno
+                                ? {
+                                    boxShadow: [
+                                        "0 0 1px white",
+                                        "0 0 10px white",
+                                        "0 0 1px white"
+                                    ],
+                                    scale: 1
+                                }
+                                : {
+                                    boxShadow: "none",
+                                    scale: 1
+                                }
+                        }
+                        transition={
+                            !miTurno
+                                ? {
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    repeatType: "loop",
+                                    ease: "linear"
+                                }
+                                : {}
+                        }
+                    >
+                        {tableroRival.map((columna, idx) => (
+                            <LineaVerticalDados
+                                key={idx}
+                                lineaVertical={columna}
+                                yo={yo}
+                                rival={rival}
+                                totalLinea={calcularTotalColumna(columna)}
+                            />
+                        ))}
+                    </motion.div>
+                    <div className='espacioDadosRival'>
+                        {tirandoDadoOponente && dadoActual && (
+                            <motion.img drag dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }} src={require(`../../Assets/dado${dadoActual}.png`)} alt={`Dado ${dadoActual}`} />
+                        )}
+                    </div>
+                </motion.div>
+            </AnimatePresence>
         )
     }
 
     if (yo) {
         return (
-            <div className="espacioPersonal">
-                <div className='espacioDadosPersonal'>
-                    {miTurno && !tirandoDado && <button onClick={jugarTurno}>Tirar dado</button>}
-                    {tirandoDado && dadoActual && (
-                        <img src={require(`../../Assets/dado${dadoActual}.png`)} alt={`Dado ${dadoActual}`} />
-                    )}
-                </div>
-                <div className="tableroPersonal">
-                    {tableroPersonal.map((columna, idx) => (
-                        <LineaVerticalDados
-                            key={idx}
-                            lineaVertical={columna}
-                            yo={yo}
-                            rival={rival}
-                            onClick={() => sumarDadoLinea(idx)}
-                            totalLinea={calcularTotalColumna(columna)}
-                        />
-                    ))}
-                </div>
-                <div className='nombrePersonal'>
-                    {miTurno && <div>Tu turno</div>}
-                    {nombre} <br />
-                    Puntos:{totalTableroPersonal}
-                </div>
-            </div>
+            <AnimatePresence>
+                <motion.div className="espacioPersonal"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                >
+                    <div className='espacioDadosPersonal'>
+                        {miTurno && !tirandoDado && <button onClick={jugarTurno} className='botonTirarDado'>Tirar dado</button>}
+                        {tirandoDado && dadoActual && (
+                            <AnimatePresence>
+                                <motion.img
+                                    src={require(`../../Assets/dado${dadoActual}.png`)}
+                                    alt={`Dado ${dadoActual}`}
+                                    drag
+                                    dragConstraints={{ top: -200, bottom: 200, left: 0, right: 600 }}
+                                    onDragEnd={(event, info) => {
+                                        console.log("Soltó en:", info.point); // punto donde soltó
+
+                                        if (info.point.x > 550 && info.point.x <= 750) {
+                                            sumarDadoLinea(0)
+                                        } else if (info.point.x > 750 && info.point.x <= 900) {
+                                            sumarDadoLinea(1)
+                                        } else if (info.point.x > 900 && info.point.x <= 1200) {
+                                            sumarDadoLinea(2)
+                                        } else {
+                                        }
+                                    }}
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{
+                                        scale: 0,
+                                        opacity: 0,
+                                        transition: { duration: 0.5, ease: "easeInOut" }
+                                    }}
+                                />
+                            </AnimatePresence>
+                        )}
+                    </div>
+                    <motion.div className="tableroPersonal"
+                        animate={
+                            miTurno
+                                ? {
+                                    boxShadow: [
+                                        "0 0 1px white",
+                                        "0 0 10px white",
+                                        "0 0 1px white"
+                                    ],
+                                    scale: 1
+                                }
+                                : {
+                                    boxShadow: "none",
+                                    scale: 1
+                                }
+                        }
+                        transition={
+                            miTurno
+                                ? {
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    repeatType: "loop",
+                                    ease: "linear"
+                                }
+                                : {}
+                        }
+                    >
+                        {tableroPersonal.map((columna, idx) => (
+                            <LineaVerticalDados
+                                key={idx}
+                                lineaVertical={columna}
+                                yo={yo}
+                                rival={rival}
+                                onClick={() => sumarDadoLinea(idx)}
+                                totalLinea={calcularTotalColumna(columna)}
+                                turno={miTurno}
+                            />
+                        ))}
+                    </motion.div>
+                    <div className='nombrePersonal'>
+                        {miTurno && <div>Tu turno</div>}
+                        {nombre} <br />
+                        Puntos:{totalTableroPersonal}
+                    </div>
+                </motion.div>
+            </AnimatePresence>
 
         )
     }

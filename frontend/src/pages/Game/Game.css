@@ -5,10 +5,11 @@ body {
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .espacioDeJuego {
-    border: 1px solid blue;
+    position: relative;
     padding: 15px;
     height: 95%;
     width: 95%;
@@ -17,6 +18,71 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgba(5, 2, 2, 0.822);
+    z-index: 99999;
+}
+
+.envoltorio-dado {
+  position: absolute;
+  top: -300px;
+  left: 50px;
+  width: 90px;
+  height: 90px;
+  z-index: 1;
+}
+
+.dado1 {
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  position: absolute;
+  left: 50px;
+  top: -300px;
+}
+
+.dado2 {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: absolute;
+  left: 600px;
+  top: -300px;
+}
+
+.dado3 {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  position: absolute;
+  left: 420px;
+  top: -300px;
+}
+
+.dado4 {
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  position: absolute;
+  top: -300px;
+}
+
+.dado5 {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: absolute;
+  left: 200px;
+  left: 1400px;
+  top: -300px;
+}
+
+.dado6 {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  position: absolute;
+  left: 1000px;
+  top: -300px;
 }
 
 @media (max-width: 900px) {

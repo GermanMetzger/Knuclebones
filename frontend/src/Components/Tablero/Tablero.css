@@ -1,176 +1,191 @@
-.tableroPersonal {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    text-align: center;
-    border: 1px solid white;
-    height: 400px;
-    width: 500px;
-    margin: 15px;
-
-}
-
-.tableroRival {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    text-align: center;
-    border: 1px solid white;
-    height: 400px;
-    width: 500px;
-    margin: 15px;
+.espacioRival {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid slategray;
+  border-radius: 15px;
+  margin: 5px;
+  height: 380px;
+  width: 800px;
 }
 
 .espacioPersonal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    border: 1px solid green;
-    margin: 5px;
-    height: 380px;
-    width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid slategray;
+  border-radius: 15px;
+  margin: 5px;
+  height: 380px;
+  width: 800px;
 }
 
-.espacioRival {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    border: 1px solid red;
-    margin: 5px;
-    height: 380px;
-    width: 800px;
+.tableroPersonal {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 15px;
+  height: 400px;
+  width: 500px;
+  margin: 15px;
+}
+
+.tableroRival {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 15px;
+  height: 400px;
+  width: 500px;
+  margin: 15px;
 }
 
 .espacioDadosRival {
-    border: 1px solid violet;
-    height: 90%;
-    width: 20%;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
+  border: 1px solid violet;
+  border-radius: 9px;
+  height: 50%;
+  width: 20%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
 .espacioDadosPersonal {
-    border: 1px solid violet;
-    height: 90%;
-    width: 20%;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
+  border: 1px solid violet;
+  border-radius: 9px;
+  height: 50%;
+  width: 20%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
 .espacioDadosPersonal img {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 9px;
+  z-index: 10;
 }
 
 .espacioDadosRival img {
     width: 100px;
     height: 100px;
-    border-radius: 15px;
+    border-radius: 9px;
+    z-index: 10;
 }
 
 .nombreRival {
-    border: 1px solid goldenrod;
-    height: 90%;
-    width: 20%;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
-
+  border: 1px solid goldenrod;
+  border-radius: 15px;
+  height: 90%;
+  width: 20%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
 .nombrePersonal {
-    border: 1px solid goldenrod;
-    height: 90%;
-    width: 20%;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
+  border: 1px solid goldenrod;
+  border-radius: 15px;
+  height: 90%;
+  width: 20%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
+.botonTirarDado {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(238, 130, 238, 0.466);
+  color: white;
+  cursor: pointer;
+}
 
 @media (max-width: 900px) {
-    .espacioRival {
-        height: 50%;
-        width: 95%;
-        flex-direction: column-reverse;
-        margin: 0;
-        padding: 1px;
-        border: 0;
-    }
+  .espacioRival {
+    height: 50%;
+    width: 95%;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+  }
 
-    .espacioPersonal {
-        height: 50%;
-        width: 95%;
-        flex-direction: column-reverse;
-        margin: 0;
-        padding: 1px;
-        border: 0;
-    }
+  .espacioPersonal {
+    height: 50%;
+    width: 95%;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+  }
 
-    .tableroPersonal {
-        height: 70%;
-        width: 100%;
-        border: 0;
-    }
+  .tableroPersonal {
+    height: 70%;
+    width: 100%;
+    border: 0;
+  }
 
-    .tableroRival {
-        height: 70%;
-        width: 100%;
-        border: 0;
-    }
+  .tableroRival {
+    height: 70%;
+    width: 100%;
+    border: 0;
+  }
 
-    .nombrePersonal {
-        height: 70%;
-        width: 95%;
-        flex-direction: initial;
-    }
+  .nombrePersonal {
+    height: 70%;
+    width: 95%;
+    flex-direction: initial;
+  }
 
-    .nombreRival {
-        height: 70%;
-        width: 95%;
-        flex-direction: initial;
-    }
+  .nombreRival {
+    height: 70%;
+    width: 95%;
+    flex-direction: initial;
+  }
 
-    .espacioDadosPersonal {
-        border-radius: 15px;
-    }
+  .espacioDadosPersonal {
+    border-radius: 15px;
+  }
 
-    .espacioDadosRival {
-        border-radius: 15px;
-    }
+  .espacioDadosRival {
+    border-radius: 15px;
+  }
 
-    .espacioDadosPersonal img {
-        width: 50px;
-        height: 50px;
-        border-radius: 15px;
-    }
+  .espacioDadosPersonal img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
 
-    .espacioDadosRival img {
-        width: 50px;
-        height: 50px;
-        border-radius: 15px;
-    }
+  .espacioDadosRival img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
 }

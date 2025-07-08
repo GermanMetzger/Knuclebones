@@ -8,31 +8,32 @@ import dado5 from "../../Assets/dado5.png"
 import dado6 from "../../Assets/dado6.png"
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { motion } from "framer-motion"
 
-export default function LineaVerticalDados({ lineaVertical, yo, rival, onClick }) {
+export default function LineaVerticalDados({ lineaVertical, yo, rival, onClick, turno }) {
   const [totalLinea, setTotalLinea] = useState(0);
 
-  useEffect(()=>{
+  useEffect(() => {
     let total = 0;
-    let [ idx0, idx1, idx2 ] = lineaVertical
+    let [idx0, idx1, idx2] = lineaVertical
     idx0 = idx0 ?? 0
     idx1 = idx1 ?? 0
     idx2 = idx2 ?? 0
-    if(idx0 === idx1 && idx1 === idx2 && idx0 !== 0){
-      total = idx0*9
-    }else if(idx0 === idx1 && idx0 !== 0 && idx1 !== 0){
-      total = idx0*4 + idx2
-    }else if(idx0 === idx2 && idx0 !== 0 && idx2 !== 0){
-      total = idx0*4 + idx1
-    }else if(idx1 === idx2 && idx1 !== 0 && idx2 !== 0){
-      total = idx1*4 + idx0
-    }else{
+    if (idx0 === idx1 && idx1 === idx2 && idx0 !== 0) {
+      total = idx0 * 9
+    } else if (idx0 === idx1 && idx0 !== 0 && idx1 !== 0) {
+      total = idx0 * 4 + idx2
+    } else if (idx0 === idx2 && idx0 !== 0 && idx2 !== 0) {
+      total = idx0 * 4 + idx1
+    } else if (idx1 === idx2 && idx1 !== 0 && idx2 !== 0) {
+      total = idx1 * 4 + idx0
+    } else {
       total = idx0 + idx1 + idx2
     }
 
     // const totalLinea = lineaVertical.reduce((acc, num) => acc + num, 0);
     setTotalLinea(total)
-  },[lineaVertical])
+  }, [lineaVertical])
 
   const insertarDado = (numero) => {
     switch (numero) {
@@ -53,29 +54,50 @@ export default function LineaVerticalDados({ lineaVertical, yo, rival, onClick }
     }
   };
 
-
+  // eslint-disable-next-line no-lone-blocks
   {
     if (rival) {
       return (
-        <div className='lineaDados'>
-          <div className='dado'>{lineaVertical[2] === 0 ? "" : <img src={insertarDado(lineaVertical[2])} alt="" />}</div>
-          <div className='dado'>{lineaVertical[1] === 0 ? "" : <img src={insertarDado(lineaVertical[1])} alt="" />}</div>
-          <div className='dado'>{lineaVertical[0] === 0 ? "" : <img src={insertarDado(lineaVertical[0])} alt="" />}</div>
-          <div className='totalVertical'>{totalLinea}</div>
-        </div>
+        <motion.div className='lineaDados' onClick={onClick}
+          initial={{ borderColor: "transparent" }}
+          animate={
+            turno ? {
+              borderColor: "white"
+            } :
+              {
+                borderColor: "transparent"
+              }
+          }
+        >
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[2] === 0 ? "" : <img src={insertarDado(lineaVertical[2])} alt="" />}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[1] === 0 ? "" : <img src={insertarDado(lineaVertical[1])} alt="" />}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[0] === 0 ? "" : <img src={insertarDado(lineaVertical[0])} alt="" />}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='totalVertical'>{totalLinea}</motion.div>
+        </motion.div>
       )
     }
   }
-  
+
+  // eslint-disable-next-line no-lone-blocks
   {
     if (yo) {
       return (
-        <div className='lineaDados' onClick={onClick}>
-          <div className='totalVertical'>{totalLinea}</div>
-          <div className='dado'>{lineaVertical[0] === 0 ? "" : <img src={insertarDado(lineaVertical[0])} alt="" />}</div>
-          <div className='dado'>{lineaVertical[1] === 0 ? "" : <img src={insertarDado(lineaVertical[1])} alt="" />}</div>
-          <div className='dado'>{lineaVertical[2] === 0 ? "" : <img src={insertarDado(lineaVertical[2])} alt="" />}</div>
-        </div>
+        <motion.div className='lineaDados' onClick={onClick}
+          initial={{ borderColor: "transparent" }}
+          animate={
+            turno ? {
+              boxShadow: "0 0 5px white"
+            } :
+              {
+                borderColor: "transparent"
+              }
+          }
+        >
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='totalVertical'>{totalLinea}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[0] === 0 ? "" : <img src={insertarDado(lineaVertical[0])} alt="" />}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[1] === 0 ? "" : <img src={insertarDado(lineaVertical[1])} alt="" />}</motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} drag dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }} className='dado'>{lineaVertical[2] === 0 ? "" : <img src={insertarDado(lineaVertical[2])} alt="" />}</motion.div>
+        </motion.div >
       )
     }
   }

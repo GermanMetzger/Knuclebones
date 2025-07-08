@@ -1,43 +1,165 @@
-html,body{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: black;
-    color: white;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  font-family: "Poiret One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  height: min(50%, 300px);
+  width: clamp(50%, 700px, 90%);
+  overflow: hidden;
 }
 
-.espacioTarjetas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border: 1px solid red;
-    margin: 15px;
-    height: 220px;
-    width: 300px;
-    border-radius: 15px;
-    margin-bottom: 80px;
+.espacioTarjetas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rebeccapurple;
+  margin: 15px;
+  height: 220px;
+  width: 300px;
+  border-radius: 15px;
+  margin-bottom: 80px;
+  background-color: rgba(0, 0, 0, 0.87);
 }
 
-.sala{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 15px;
-    border: 2px solid white;
-    margin-top: 50px;
-    padding: 20px;
-    padding-bottom: 90px;
+.sala {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 2px solid white;
+  box-shadow: 2px 0 10px white;
+  padding: 20px;
+  padding-bottom: 90px;
+  z-index: 999999;
+  background-color: #55555522;
 }
 
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
 
-.home{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+.titulo {
+  height: 80px;
+  margin-top: 100px;
+  margin: 50px;
+  font-size: xxx-large;
+  cursor: grab;
+  user-select: none;
+  z-index: 99999;
+}
+
+.ingresarNombre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  z-index: 99999;
+  background-color: #55555522;
+  padding: 50px;
+  border-radius: 50px;
+}
+
+.botonCargar {
+  margin: 15px;
+  width: 50%;
+  z-index: 99999;
+  cursor: pointer;
+}
+
+input {
+  border: 0;
+  font-size: x-large;
+  border-radius: 9px;
+  text-align: center;
+  outline: none;
+  margin-bottom: 50px;
+  background-color: rgb(219, 219, 219);
+}
+
+input:focus {
+  box-shadow: 0 0 15px grey;
+}
+
+button {
+  background-color: rgb(219, 219, 219);
+  border: 0;
+  border-radius: 9px;
+  font-size: x-large;
+}
+
+.envoltorio-dado {
+  position: absolute;
+  top: -300px;
+  left: 50px;
+  width: 90px;
+  height: 90px;
+  z-index: 0;
+}
+
+.dado1 {
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  position: absolute;
+  left: 50px;
+  top: -300px;
+}
+
+.dado2 {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: absolute;
+  left: 600px;
+  top: -300px;
+}
+
+.dado3 {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  position: absolute;
+  left: 420px;
+  top: -300px;
+}
+
+.dado4 {
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  position: absolute;
+  top: -300px;
+}
+
+.dado5 {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  position: absolute;
+  left: 200px;
+  left: 1400px;
+  top: -300px;
+}
+
+.dado6 {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  position: absolute;
+  left: 1000px;
+  top: -300px;
 }
