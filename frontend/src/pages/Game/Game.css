@@ -12,7 +12,7 @@ body {
 
 .espacioDeJuego {
   position: relative;
-  padding: 15px;
+  padding: 2px;
   height: 95%;
   width: 95%;
   border-radius: 10px;
@@ -22,6 +22,7 @@ body {
   justify-content: center;
   background-color: rgba(5, 2, 2, 0.822);
   z-index: 99999;
+  margin-top: 5px;
 }
 
 .envoltorio-dado {
@@ -98,6 +99,5 @@ body {
     height: 85%;
     width: 98vw;
     border: 0;
-    padding: 15px;
   }
 }

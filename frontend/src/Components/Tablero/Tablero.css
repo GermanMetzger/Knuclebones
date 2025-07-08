@@ -183,17 +183,17 @@
     padding-bottom: 5px;
   }
 
-  .espacioDadosPersonal {
+  .espacioDadosRival {
     border-radius: 15px;
-    width: 100px;
-    height: 80px;
+    width: 70px;
+    height: 50px;
     margin: 0;
   }
 
-  .espacioDadosRival {
+  .espacioDadosPersonal {
     border-radius: 15px;
-    width: 100px;
-    height: 80px;
+    width: 70px;
+    height: 50px;
     margin: 0;
   }
 
