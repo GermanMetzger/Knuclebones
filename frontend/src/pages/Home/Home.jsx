@@ -14,7 +14,6 @@ import dado6 from "../../Assets/dado6.png"
 
 
 export const socket  = await io("https://200.85.177.8:4001/");
-alert(socket.id+" / Connected status: "+socket.connected);
 //export const socket = io("https://knuclebones-production.up.railway.app/");
 // export const socket = io("http://localhost:4000");
 
@@ -58,6 +57,8 @@ export default function Home() {
         }
         socket.on("sala:jugadoresActualizados", (lista) => {
             // console.log(lista)
+alert(socket.id+" / Connected status: "+socket.connected);
+            
             setJugadores(lista);
             if (lista.length > 1) {
                 setPreparados(true)
