@@ -57,7 +57,6 @@ export default function Home() {
         }
         socket.on("sala:jugadoresActualizados", (lista) => {
             // console.log(lista)
-alert(socket.id+" / Connected status: "+socket.connected);
             
             setJugadores(lista);
             if (lista.length > 1) {
