@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import LineaVerticalDados from '../LineaVerticalDados/LineaVerticalDados'
 import { AnimatePresence, motion, scale } from "framer-motion"
+import CartelFinal from '../../Components/CartelFinal/CartelFinal';
 
 export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const tableroVacio = [
@@ -24,6 +25,8 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     const [tirandoDadoOponente, setTirandoDadoOponente] = useState(false);
     const [dadoActual, setDadoActual] = useState(null);
     const [bloqueado, setBloqueado] = useState(false)
+    const [cartelFinal, setCartelFinal] = useState(false)
+    const [gano, setGano] = useState(false)
     const esCelular = window.innerWidth < 900;
 
 
@@ -74,11 +77,14 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
 
         if (tableroLleno(tableroPersonal) || tableroLleno(tableroRival)) {
             if (totalTableroPersonal > totalTableroRival) {
-                alert("¡Ganaste! " + totalTableroPersonal + " a " + totalTableroRival);
+                setGano(true);
+                setCartelFinal(true);
             } else if (totalTableroPersonal < totalTableroRival) {
-                alert("¡Perdiste! " + totalTableroPersonal + " a " + totalTableroRival);
+                setGano(false);
+                setCartelFinal(true);
             } else {
-                alert("¡Empate! " + totalTableroPersonal + " a " + totalTableroRival);
+                setGano("empate");
+                setCartelFinal(true);
             }
 
         }
@@ -189,6 +195,7 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
     if (rival) {
         return (
             <AnimatePresence>
+                {cartelFinal && <CartelFinal jugador={nombre} gano={gano} puntaje={totalTableroPersonal} />}
 
 
                 <motion.div className={"espacioRival"}
@@ -264,8 +271,8 @@ export default function Tablero({ nombre, socketId, socket, codigoSala }) {
                                     dragConstraints={!esCelular ? { top: -200, bottom: 200, left: 0, right: 600 } : { top: -300, bottom: 0, left: -300, right: 300 }}
                                     onDragEnd={(event, info) => {
                                         console.log("Soltó en:", info.point); // punto donde soltó
-                                        let izq = window.innerWidth *0.35;
-                                        let der = window.innerWidth *0.65;
+                                        let izq = window.innerWidth * 0.35;
+                                        let der = window.innerWidth * 0.65;
 
 
                                         if (esCelular) {

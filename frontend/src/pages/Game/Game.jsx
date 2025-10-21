@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { socket, caidaDados } from "../Home/Home"
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Tablero from '../../Components/Tablero/Tablero';
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 import "./Game.css"
 import dado1 from "../../Assets/dado1.png"
 import dado2 from "../../Assets/dado2.png"
@@ -12,11 +12,12 @@ import dado5 from "../../Assets/dado5.png"
 import dado6 from "../../Assets/dado6.png"
 
 
+
 function Game() {
     const [jugadores, setJugadores] = useState([])
     const [searchParams] = useSearchParams();
     const [codigoSala, setCodigoSala] = useState("")
-     const dadosImgs = { 1: dado1, 2: dado2, 3: dado3, 4: dado4, 5: dado5, 6: dado6 };
+    const dadosImgs = { 1: dado1, 2: dado2, 3: dado3, 4: dado4, 5: dado5, 6: dado6 };
 
     useEffect(() => {
         const codigo = searchParams.get("codigo");

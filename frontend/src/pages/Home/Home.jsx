@@ -13,9 +13,10 @@ import dado6 from "../../Assets/dado6.png"
 
 
 
-export const socket  = await io("https://200.85.177.8:4001/");
+export const socket = io("http://200.85.177.8:8080/");
 //export const socket = io("https://knuclebones-production.up.railway.app/");
-// export const socket = io("http://localhost:4000");
+// export const socket = io("https://localhost:8443");
+// export const socket = io("/");
 
 export const caidaDados = {
     cayendo: (i) => ({
@@ -180,7 +181,8 @@ export default function Home() {
                     >Cargar</motion.button>
                 </div>
             )}
-            {nombreIngresado && (
+
+            {nombreIngresado && ( 
                 <div className='sala'>
                     <h1>{jugadores.length === 2 ? "JUGAR" : "ESPERNADO JUGADORES..."}</h1>
                     <div className='espacioTarjetas'>

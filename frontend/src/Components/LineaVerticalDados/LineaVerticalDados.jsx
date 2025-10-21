@@ -13,6 +13,7 @@ import { motion } from "framer-motion"
 export default function LineaVerticalDados({ lineaVertical, yo, rival, onClick, turno }) {
   const [totalLinea, setTotalLinea] = useState(0);
 
+
   useEffect(() => {
     let total = 0;
     let [idx0, idx1, idx2] = lineaVertical
