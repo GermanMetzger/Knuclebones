@@ -13,7 +13,8 @@ import dado6 from "../../Assets/dado6.png"
 
 
 
-export const socket = io("http://200.85.177.8:8080/");
+// export const socket = io("http://200.85.177.8:8080/");
+export const socket = io("https://costasentidocentro.duckdns.org:4001/");
 //export const socket = io("https://knuclebones-production.up.railway.app/");
 // export const socket = io("https://localhost:8443");
 // export const socket = io("/");
